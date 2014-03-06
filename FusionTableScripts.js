@@ -11,6 +11,8 @@
   
 */
 
+console.log ("Civilian Unemployment Data");
+
 //I will add a Google data fusion table to bring data into my Google visualization.
 
 //I am adding a function here that will retrieve the data. The name of my data is joblessInfo.
@@ -35,7 +37,7 @@ function infoLoaded(joblessInfo){
 		//Create an options object to actually cutomize the look of the data chart.
 		
 		var chartOptions = {
-			title: "Unemployment Rates in the United States"
+			title: "Unemployment in the United States"
 			
 		};		
 
@@ -88,7 +90,7 @@ function infoLoaded(joblessInfo){
 	//I am creating a new variable for the data table with a title property.
 	//This will be the header of my data table.
 	var options = {
-		title: "Current Unemployment Rates in the United States"
+		title: "Unemployment in the United States"
 	};
 
 	console.log(masterList);
