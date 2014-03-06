@@ -11,6 +11,8 @@
   
 */
 
+//I will add a Google data fusion table to bring data into my Google visualization.
+
 //I am adding a function here that will retrieve the data. The name of my data is joblessInfo.
 //I must remember to check the web page only in Firefox and not Chrome to ensure the data has been loaded.
 
@@ -19,12 +21,10 @@ var tableUrl = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*+FR
 
 function infoLoaded(joblessInfo){
 
-	console.log(joblessInfo);
-
 	var gDataTable = new google.visualization.DataTable();
 	
 		
-		//When I add columns, the firsrt parameter is the data type in that column.
+		//When I add columns, the first parameter is the data type in that column.
 		//The second parameter is the name of the column.
 		
 		gDataTable.addColumn('string', joblessInfo.columns[0]);
@@ -32,10 +32,10 @@ function infoLoaded(joblessInfo){
 		
 		gDataTable.addRows(joblessInfo.rows); //This only works becuase it is a google.visualization object.
 		
-		//Create an options object to actually cutomize the look of the chart.
+		//Create an options object to actually cutomize the look of the data chart.
 		
 		var chartOptions = {
-			title: "Unemployment since 1948"
+			title: "Unemployment Rates in the United States"
 			
 		};		
 
@@ -56,15 +56,9 @@ function infoLoaded(joblessInfo){
 	var newHeader = joblessInfo.columns;
 	
 	var data = new google.visualization.DataTable();
-data.addColumn('string', 'Task');
-data.addColumn('number', 'Hours per Day');
-data.addRows([
-  ['Work', 11],
-  ['Eat', 2],
-  ['Commute', 2],
-  ['Watch TV', 2],
-  ['Sleep', {v:7, f:'7.000'}]
-]);
+	gDataTable.addColumn('string', newHeader[0]);
+	gDataTable.addColumn('number', newHeader[1]);
+	gDataTable.addRows(oblessInfo.rows);
 
 
 	masterList.push(newHeader);
@@ -91,10 +85,10 @@ data.addRows([
 
 	console.log(masterList);
 
-	//I am creating a variable for the chart title with a title property.
-	//This will be the header of my chart.
+	//I am creating a new variable for the data table with a title property.
+	//This will be the header of my data table.
 	var options = {
-		title: "Acme Shoe Company Performance"
+		title: "Current Unemployment Rates in the United States"
 	};
 
 	console.log(masterList);
@@ -106,8 +100,8 @@ data.addRows([
 	//I'm going to create a chart variable. The document.getElementByID is the 
 	//equivalent of the jQuery $("#divName"). I must add the raw JavaScript command
 	//"mainChartDiv" here.
-	//For my Fusion Table Project, I have changed this from a line chart to a bar chart.
-	var mainChart = new google.visualization.BarChart(document.getElementById("mainChartDiv"));
+	//For my Fusion Table Project, I am making this a line chart.
+	var mainChart = new google.visualization.LineChart(document.getElementById("mainChartDiv"));
 	mainChart.draw(mainDataTable, options);
 }
           
@@ -119,10 +113,10 @@ function googleProjectLoaded(){
 /*I'm going to set up my jQuery call with a get command to get the data.
  "$.get is the "Marco" and "infoLoaded"" is the "Polo."
  */
-//Now I'm adding in the https address to add the Google fusion table data.
+//Now I'm adding in the https address with a WHERE parameter to add the Google fusion table data.
+//I have to add an ">" after the "DATE", then go directly to the date 1969-12-01.
 
-		$.get("https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*FROM+1fcALUPt1J06yQQx349URVcxAqRcgZFdWDgwO932j&key=AIzaSyBxm3yDApl-FkVRwHUKGACLeBhMMTX2ubI", infoLoaded, "json");	
-
+		$.get("https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*FROM+1fcALUPt1J06yQQx349URVcxAqRcgZFdWDgwO932j+WHERE+DATE>'1969-12-01'&key=AIzaSyBxm3yDApl-FkVRwHUKGACLeBhMMTX2ubI")
 }
 
 
