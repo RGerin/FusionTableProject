@@ -27,8 +27,8 @@ function infoLoaded(joblessInfo){
 		//When I add columns, the firsrt parameter is the data type in that column.
 		//The second parameter is the name of the column.
 		
-		gDataTable.addColumn('string', joblessInfo.columns[0];
-		gDataTable.addColumn('number', joblessInfo.columns[1];
+		gDataTable.addColumn('string', joblessInfo.columns[0]);
+		gDataTable.addColumn('number', joblessInfo.columns[1]);
 		
 		gDataTable.addRows(joblessInfo.rows); //This only works becuase it is a google.visualization object.
 		
@@ -49,9 +49,23 @@ function infoLoaded(joblessInfo){
 
 	var masterList = [];
 
-	//I must create a var with a "new header" list to adjust the "Unknown header type 548" 
-	//line error that appears in Firefox.
-	var newHeader = ["Date", "Jobless Data"];
+	//I have changed the "new header" list to "joblessInfo.columns". T
+	//Then I'll add code from the Google Developers page to create a new empty DataTable 
+	//to populate manually with data.
+	
+	var newHeader = joblessInfo.columns;
+	
+	var data = new google.visualization.DataTable();
+data.addColumn('string', 'Task');
+data.addColumn('number', 'Hours per Day');
+data.addRows([
+  ['Work', 11],
+  ['Eat', 2],
+  ['Commute', 2],
+  ['Watch TV', 2],
+  ['Sleep', {v:7, f:'7.000'}]
+]);
+
 
 	masterList.push(newHeader);
 
@@ -92,7 +106,8 @@ function infoLoaded(joblessInfo){
 	//I'm going to create a chart variable. The document.getElementByID is the 
 	//equivalent of the jQuery $("#divName"). I must add the raw JavaScript command
 	//"mainChartDiv" here.
-	var mainChart = new google.visualization.LineChart(document.getElementById("mainChartDiv"));
+	//For my Fusion Table Project, I have changed this from a line chart to a bar chart.
+	var mainChart = new google.visualization.BarChart(document.getElementById("mainChartDiv"));
 	mainChart.draw(mainDataTable, options);
 }
           
@@ -104,7 +119,9 @@ function googleProjectLoaded(){
 /*I'm going to set up my jQuery call with a get command to get the data.
  "$.get is the "Marco" and "infoLoaded"" is the "Polo."
  */
-		$.get(tableUrl, infoLoaded, "json");	
+//Now I'm adding in the https address to add the Google fusion table data.
+
+		$.get("https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*FROM+1fcALUPt1J06yQQx349URVcxAqRcgZFdWDgwO932j&key=AIzaSyBxm3yDApl-FkVRwHUKGACLeBhMMTX2ubI", infoLoaded, "json");	
 
 }
 
