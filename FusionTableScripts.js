@@ -18,52 +18,48 @@ console.log ("Civilian Unemployment Data");
 //I am adding a function here that will retrieve the data. The name of my data is joblessInfo.
 //I must remember to check the web page only in Firefox and not Chrome to ensure the data has been loaded.
 
-var tableUrl = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*+FROM+1fcALUPt1J06yQQx349URVcxAqRcgZFdWDgwO932j&key=AIzaSyBxm3yDApl-FkVRwHUKGACLeBhMMTX2ubI";
+function newData(unemploymentData){
 
-
-function infoLoaded(joblessInfo){
-
-	var gDataTable = new google.visualization.DataTable();
+	var gDataList = new google.visualization.DataList();
 	
 		
 		//When I add columns, the first parameter is the data type in that column.
 		//The second parameter is the name of the column.
 		
-		gDataTable.addColumn('string', joblessInfo.columns[0]);
-		gDataTable.addColumn('number', joblessInfo.columns[1]);
+		gDataList.addColumn('string', unemploymentData.columns[0]);
+		gDataList.addColumn('number', unemploymentData.columns[1]);
 		
-		gDataTable.addRows(joblessInfo.rows); //This only works becuase it is a google.visualization object.
+		gDataList.addRows(unemploymentData.rows); //This only works becuase it is a google.visualization object.
 		
-		//Create an options object to actually cutomize the look of the data chart.
+		//Create a var for the updated chart and give it a title.
 		
-		var chartOptions = {
+		var mupdatedChartoptions = {
 			title: "Unemployment in the United States"
 			
 		};		
 
 	//I will add a variable to put a lable on "Observations" in the data in my JSON file.
 
-	var observationsArray = joblessInfo.observations;
+	var mobservationsArray = unemploymentData.observations;
 
-		console.log(joblessInfo.observations);
-
+	
 	//Now I'm going to create a container to hold all the other lists.
 
-	var masterList = [];
+	var mmasterDataList = [];
 
 	//I have changed the "new header" list to "joblessInfo.columns". T
 	//Then I'll add code from the Google Developers page to create a new empty DataTable 
 	//to populate manually with data.
 	
-	var newHeader = joblessInfo.columns;
+	var mnewHeader = junemploymentData.columns;
 	
-	var data = new google.visualization.DataTable();
-	gDataTable.addColumn('string', newHeader[0]);
-	gDataTable.addColumn('number', newHeader[1]);
-	gDataTable.addRows(oblessInfo.rows);
+	var data = new google.visualization.DataList();
+	gDataList.addColumn('string', newHeader[0]);
+	gDataList.addColumn('number', newHeader[1]);
+	gDataList.addRows(oblessInfo.rows);
 
 
-	masterList.push(newHeader);
+	masterDataList.push(newHeader);
 
 
 	//To create my visualiazation, I need to convert my JSON data to an array of arrays.
@@ -80,7 +76,7 @@ function infoLoaded(joblessInfo){
 	for(var i=0; i<observationsArray.length; i++) {
 		var indieObject = observationsArray[i];	
 		var mainDataArray = [indieObject.date, Number(indieObject.value)];	
-		masterList.push(mainDataArray);
+		masterDataList.push(mainDataArray);
 }
 	//I am creating an object to convert a string to a number.
 	var num = new Number(100);
@@ -93,7 +89,7 @@ function infoLoaded(joblessInfo){
 		title: "Unemployment in the United States"
 	};
 
-	console.log(masterList);
+	console.log(masterDataList);
 
 	//Now I am going to use an array to data table function and pass the set of arrays 
 	//I created to generate the data table to pass to the visualization function.
@@ -103,14 +99,14 @@ function infoLoaded(joblessInfo){
 	//equivalent of the jQuery $("#divName"). I must add the raw JavaScript command
 	//"mainChartDiv" here.
 	//For my Fusion Table Project, I am making this a line chart.
-	var mainChart = new google.visualization.LineChart(document.getElementById("mainChartDiv"));
-	mainChart.draw(mainDataTable, options);
+	var mainDataChart = new google.visualization.LineChart(document.getElementById("mainDataChartDiv"));
+	mainDataChart.draw(mainDataTable, options);
 }
           
 
 //I am adding a function here that is the "Polo" of the google name "Marco."*/
 
-function googleProjectLoaded(){
+function newDataLoaded(){
 	console.log("my project loaded");
 /*I'm going to set up my jQuery call with a get command to get the data.
  "$.get is the "Marco" and "infoLoaded"" is the "Polo."
@@ -127,7 +123,7 @@ function pageReady(){
 	console.log("page done")
 	//Step 1 is now done. Next step is to load the Google charting package. Write the "google load" function
 	//followed by a list of parameters. The google name is the "Marco" and the function name is the "Polo."
-	google.load("visualization", "1", {packages:["corechart"], "callback":googleProjectLoaded})
+	google.load("visualization", "1", {packages:["corechart"], "callback":newDataLoaded})
 
 
 }
@@ -136,5 +132,5 @@ function pageReady(){
 Document ready is the "Marco" and the function is the "Polo."*/
 $(document).ready(pageReady);
 
-console.log("js loaded");
+
 
