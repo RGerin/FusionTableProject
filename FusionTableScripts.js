@@ -47,11 +47,10 @@
 	//Now I'm going to load the data from a Google fusion table instead of from the json file.
 	//I added the data file name and my API key ID to the https address.
 	// Now I'm going to add a WHERE parameter in the https address to specify certain years for the data. 
-	// I have to add an ">" after the "DATE", then go directly to the date '1969-12-01'.
+	// The WHERE parameter will display the chart data for 1969-12-01 and beyond.
 
 	$.get("https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*+FROM+1fSVYn7aezbKW9l1Vxi93-jH46rN7x2mxbwr_-2o3+WHERE+DATE>%271969-12-01%27&key=AIzaSyBxm3yDApl-FkVRwHUKGACLeBhMMTX2ubI", newDataLoaded, "json");
 	}
-	
 	
 	//I am working with the Google chart loading function.
 	function pageLoaded(){
@@ -62,5 +61,6 @@
 	}
 	
 	$(document).ready(pageLoaded);
+	
 	
 	
