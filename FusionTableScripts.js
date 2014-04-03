@@ -51,7 +51,7 @@ function googleLoaded() {
 	// Now I'm going to add a WHERE parameter in the https address to specify certain years for the data.
 	// The WHERE parameter will display the chart data for 1969-12-01 and beyond.
 
-	$.get("https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*+FROM+1sJdI-HjjB2yBpsxv9rzRjJwP7Y0HJYvkmjklpnDk+WHERE+DATE>'1969-12-01'&key=AIzaSyBxm3yDApl-FkVRwHUKGACLeBhMMTX2ubI", newDataLoaded, "json");
+	$.get("https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*+FROM+1sJdI-HjjB2yBpsxv9rzRjJwP7Y0HJYvkmjklpnDk+WHERE+DATE>'1969-12-01'&key=AIzaSyBxm3yDApl-FkVRwHUKGACLeBhMMTX2ubI",newDataLoaded,"json");
 
 }
 
