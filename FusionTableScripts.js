@@ -32,12 +32,12 @@ function newDataLoaded(UNRATE) {
 	//I'm creating a var for the updated chart and giving it a title.
 
 	var myChartOptions = {
-		title : "Unemployment in the United States"
+		title: "Unemployment in the United States"
 	};
 
 	//Now I'm going to create a line chart. Then I must pass the Google DataTable variable I've created here.
 
-	var myGoogleChart = new google.visualization.LineChart(document.getElementById("unemploymentChartDiv"));
+	var mygoogleChart = new google.visualization.LineChart(document.getElementById("unemploymentChartDiv"));
 	myGoogleChart.draw(googleDataSource, myChartOptions);
 
 }
